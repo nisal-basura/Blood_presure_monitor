@@ -26,7 +26,7 @@ class BloodPressureChart extends StatelessWidget {
                   color: Colors.black.withOpacity(0.1),
                   spreadRadius: 5,
                   blurRadius: 7,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
@@ -108,8 +108,7 @@ class BloodPressureChart extends StatelessWidget {
     }).toList();
   }
 
-  Widget _buildTableCell(String text,
-      {bool isHighlighted = false, bool isHeader = false}) {
+  Widget _buildTableCell(String text, {bool isHeader = false}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text(
@@ -128,7 +127,7 @@ class BloodPressureChart extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: AnimatedOpacity(
         opacity: isBlinking ? 1.0 : 0.5,
-        duration: Duration(seconds: 1),
+        duration: const Duration(seconds: 1),
         child: Text(
           text,
           style: TextStyle(

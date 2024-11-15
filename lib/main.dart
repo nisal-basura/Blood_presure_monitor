@@ -15,6 +15,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -25,11 +27,11 @@ class MyApp extends StatelessWidget {
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25.0),
-            borderSide: BorderSide(color: Colors.blueAccent),
+            borderSide: const BorderSide(color: Colors.blueAccent),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25.0),
-            borderSide: BorderSide(color: Colors.redAccent),
+            borderSide: const BorderSide(color: Colors.redAccent),
           ),
         ),
         buttonTheme: ButtonThemeData(
@@ -45,6 +47,8 @@ class MyApp extends StatelessWidget {
 }
 
 class InputScreen extends StatefulWidget {
+  const InputScreen({super.key});
+
   @override
   _InputScreenState createState() => _InputScreenState();
 }
@@ -62,7 +66,7 @@ class _InputScreenState extends State<InputScreen>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     )..repeat(reverse: true);
 
     _sizeAnimation = Tween<double>(begin: 80, end: 100).animate(CurvedAnimation(
@@ -95,8 +99,8 @@ class _InputScreenState extends State<InputScreen>
         'Invalid Input',
         '', // Empty string because we are using messageText for the content.
         snackPosition: SnackPosition.TOP,
-        backgroundColor: Color.fromARGB(255, 234, 139, 139),
-        messageText: Text.rich(
+        backgroundColor: const Color.fromARGB(255, 234, 139, 139),
+        messageText: const Text.rich(
           TextSpan(
             text:
                 'Please enter valid numbers for both systolic and diastolic values that are ',
@@ -123,8 +127,8 @@ class _InputScreenState extends State<InputScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Blood Pressure Monitor'),
-        backgroundColor: Color.fromARGB(255, 207, 171, 171),
+        title: const Text('Blood Pressure Monitor'),
+        backgroundColor: const Color.fromARGB(255, 207, 171, 171),
       ),
       body: Stack(
         children: [
@@ -163,7 +167,7 @@ class _InputScreenState extends State<InputScreen>
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
@@ -172,40 +176,39 @@ class _InputScreenState extends State<InputScreen>
                       keyboardType: TextInputType.number,
 
                       /// Number pad
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Systolic (mm Hg)',
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     TextFormField(
                       controller: diastolicController,
                       keyboardType: TextInputType.number,
 
                       /// Number pad
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Diastolic (mm Hg)',
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                     ElevatedButton(
                       onPressed: navigateToInformationScreen,
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.redAccent,
-
-                        /// Button color
-                        onPrimary: Colors.white,
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.redAccent,
 
                         ///Text color
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 50, vertical: 15),
 
                         /// Button padding
                       ),
-                      child: Text('Show Info', style: TextStyle(fontSize: 20)),
+                      child: const Text('Show Info',
+                          style: TextStyle(fontSize: 20)),
                     ),
                   ],
                 ),
@@ -222,7 +225,8 @@ class InformationScreen extends StatelessWidget {
   final int systolic;
   final int diastolic;
 
-  InformationScreen({required this.systolic, required this.diastolic});
+  const InformationScreen(
+      {super.key, required this.systolic, required this.diastolic});
 
   @override
   Widget build(BuildContext context) {
@@ -231,7 +235,7 @@ class InformationScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Blood Pressure Category'),
+        title: const Text('Blood Pressure Category'),
         backgroundColor: categoryColor,
       ),
       body: SafeArea(
@@ -242,36 +246,36 @@ class InformationScreen extends StatelessWidget {
           children: [
             // Texts Container for better spacing control
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 children: [
                   Text(
                     'Systolic blood pressure is $systolic mm Hg',
                     style: Theme.of(context)
                         .textTheme
-                        .headline6
+                        .titleLarge
                         ?.copyWith(color: const Color.fromARGB(255, 0, 0, 0)),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
 
                   /// Visual spacing
                   Text(
                     'Diastolic blood pressure is $diastolic mm Hg',
                     style: Theme.of(context)
                         .textTheme
-                        .headline6
+                        .titleLarge
                         ?.copyWith(color: const Color.fromARGB(255, 0, 0, 0)),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
                   /// Visual spacing
                   Text(
                     'This is considered $category.',
                     style: Theme.of(context)
                         .textTheme
-                        .headline6
+                        .titleLarge
                         ?.copyWith(color: categoryColor),
                     textAlign: TextAlign.center,
                   ),
